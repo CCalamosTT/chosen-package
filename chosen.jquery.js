@@ -45,7 +45,7 @@
           if (group_position != null) {
             this.parsed[group_position].children += 1;
           }
-          this.parsed.push({
+          let optionData = {
             array_index: this.parsed.length,
             options_index: this.options_index,
             value: option.value,
@@ -57,8 +57,14 @@
             group_array_index: group_position,
             group_label: group_position != null ? this.parsed[group_position].label : null,
             classes: option.className,
-            style: option.style.cssText
-          });
+            style: option.style.cssText,
+            searchAttributes: []
+          };
+          let optionAttributes = option.dataset;
+          for(var key in optionAttributes) {
+            optionData.searchAttributes.push(optionAttributes[key]);
+          }
+          this.parsed.push(optionData);
         } else {
           this.parsed.push({
             array_index: this.parsed.length,
@@ -359,18 +365,42 @@
           }
           text = option.group ? option.label : option.text;
           if (!(option.group && !this.group_search)) {
+            option.non_highlight = false;
+            option.match_text = "";
+
             search_match = this.search_string_match(text, regex);
             option.search_match = search_match != null;
+            
+            // TT Specific
+            if (!option.search_match) {
+              for (var attr in option.searchAttributes) {
+                search_match = this.search_string_match(option.searchAttributes[attr], regex);
+                option.search_match = search_match != null;
+                if (option.search_match) {
+                  option.match_text = option.searchAttributes[attr];
+                  option.non_highlight = true;
+                  break;
+                }
+              }
+            }
+            
             if (option.search_match && !option.group) {
               results += 1;
             }
+
             if (option.search_match) {
               if (query.length) {
+                let label = option.match_text ? option.match_text : text;
+
                 startpos = search_match.index;
-                prefix = text.slice(0, startpos);
-                fix = text.slice(startpos, startpos + query.length);
-                suffix = text.slice(startpos + query.length);
+                prefix = label.slice(0, startpos);
+                fix = label.slice(startpos, startpos + query.length);
+                suffix = label.slice(startpos + query.length);
+
                 option.highlighted_html = (this.escape_html(prefix)) + "<em>" + (this.escape_html(fix)) + "</em>" + (this.escape_html(suffix));
+                if (option.non_highlight) {
+                  option.highlighted_html = (this.escape_html(option.title)) + " (" + (option.highlighted_html) + ")";
+                }
               }
               if (results_group != null) {
                 results_group.group_match = true;
@@ -1157,8 +1187,9 @@
               skip_highlight: true
             });
           } else {
-            this.search_field.val("");
-            this.winnow_results();
+            // Commented out in order to not remove current query
+            // this.search_field.val("");
+            // this.winnow_results();
           }
         } else {
           this.results_hide();

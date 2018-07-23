@@ -1,7 +1,11 @@
 {
   "name": "harvesthq/chosen",
-  "description": "Chosen is a JavaScript plugin that makes select boxes user-friendly. It is currently available in both jQuery and Prototype flavors.",
+  "description": "Chosen is a JavaScript plugin that makes select boxes user-friendly. It is currently available in both jQuery and Prototype flavors. (Modified for TT)",
   "authors": [
+    {
+      "name": "Cole Calamos",
+      "url": "https://github.com/ccalamos"
+    },
     {
       "name": "Patrick Filler",
       "homepage": "https://github.com/pfiller"

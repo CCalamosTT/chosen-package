@@ -1,5 +1,14 @@
 # Chosen
 
+_forked from Chosen JS GitHub for Notification Server_
+
+Changes Include:
+- Search by data-attribute
+- Update label for current match
+- Ability to set the title attribute for information to be given before current match
+
+-----------
+
 Chosen is a library for making long, unwieldy select boxes more user friendly.
 
 - jQuery support: 1.7+
