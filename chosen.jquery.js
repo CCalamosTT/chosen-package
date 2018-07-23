@@ -138,7 +138,7 @@
       this.include_group_label_in_selected = this.options.include_group_label_in_selected || false;
       this.max_shown_results = this.options.max_shown_results || Number.POSITIVE_INFINITY;
       this.case_sensitive_search = this.options.case_sensitive_search || false;
-      this.display_search_label = this.options.display_search_label || true;
+      this.display_search_label = this.options.display_search_label || false;
       return this.hide_results_on_select = this.options.hide_results_on_select != null ? this.options.hide_results_on_select : true;
     };
 

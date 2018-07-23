@@ -6,6 +6,7 @@ Changes Include:
 - Search by data-attribute
 - Update label for current match
 - Ability to set the title attribute for information to be given before current match
+- Ability to display search label
 
 -----------
 
