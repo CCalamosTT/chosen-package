@@ -138,6 +138,7 @@
       this.include_group_label_in_selected = this.options.include_group_label_in_selected || false;
       this.max_shown_results = this.options.max_shown_results || Number.POSITIVE_INFINITY;
       this.case_sensitive_search = this.options.case_sensitive_search || false;
+      this.display_search_label = this.options.display_search_label || true;
       return this.hide_results_on_select = this.options.hide_results_on_select != null ? this.options.hide_results_on_select : true;
     };
 
@@ -157,7 +158,7 @@
       if (this.include_group_label_in_selected && (item.group_label != null)) {
         return "<b class='group-name'>" + (this.escape_html(item.group_label)) + "</b>" + item.html;
       } else {
-        if (item.non_highlight) {
+        if (item.non_highlight && this.display_search_label) {
           return item.title + " (" + item.match_text + ")";
         }
         return item.html;
