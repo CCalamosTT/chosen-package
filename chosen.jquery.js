@@ -1101,7 +1101,7 @@
       var choice, close_link;
       choice = $('<li />', {
         "class": "search-choice"
-      }).html("<span>" + (this.choice_label(item)) + "</span>");
+      }).html("<span data-grouping=\""+item.group_label+"\">" + (this.choice_label(item)) + "</span>");
       if (item.disabled) {
         choice.addClass('search-choice-disabled');
       } else {
