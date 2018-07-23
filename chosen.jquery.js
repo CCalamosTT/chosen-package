@@ -157,6 +157,9 @@
       if (this.include_group_label_in_selected && (item.group_label != null)) {
         return "<b class='group-name'>" + (this.escape_html(item.group_label)) + "</b>" + item.html;
       } else {
+        if (item.non_highlight) {
+          return item.title + " (" + item.match_text + ")";
+        }
         return item.html;
       }
     };
