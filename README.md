@@ -7,6 +7,7 @@ Changes Include:
 - Update label for current match
 - Ability to set the title attribute for information to be given before current match
 - Ability to display search label
+- Shorthand search based upon the Opt Groups data-chosennames array attribute
 
 -----------
 

@@ -404,7 +404,7 @@
 
             if (option.shorthand_search) {
               for (var name in option.group_names) {
-                if (option.group_names[name] === option.shorthand_group) {
+                if (option.group_names[name].toLowerCase() === option.shorthand_group.toLowerCase()) {
                   group_match = true;
                   break;
                 }
