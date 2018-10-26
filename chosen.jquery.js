@@ -157,7 +157,7 @@
       this.max_shown_results = this.options.max_shown_results || Number.POSITIVE_INFINITY;
       this.case_sensitive_search = this.options.case_sensitive_search || false;
       this.display_search_label = this.options.display_search_label || false;
-      this.throttle_search_time_ms = this.options.throttle_search_time_ms || false;
+      this.throttle_search_ms = this.options.throttle_search_ms || false;
       return this.hide_results_on_select = this.options.hide_results_on_select != null ? this.options.hide_results_on_select : true;
     };
 
@@ -353,8 +353,9 @@
     };
 
     AbstractChosen.prototype.results_search = function (evt) {
-      if (this.throttle_search_time_ms) {
-        this.timeout = window.setTimeout(this.show_results.bind(this), this.throttle_search_time_ms)
+      if (this.throttle_search_ms) {
+        window.clearTimeout(this.timeout);
+        this.timeout = window.setTimeout(this.show_results.bind(this), this.throttle_search_ms)
       } else {
         this.show_results();
       }
