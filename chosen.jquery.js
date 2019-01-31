@@ -1253,8 +1253,12 @@
             });
           } else {
             // Commented out in order to not remove current query
-            // this.search_field.val("");
-            // this.winnow_results();
+            if (this.hide_results_on_select) {
+              this.search_field.val("");
+              this.winnow_results();
+            } else {
+              this.search_field.select();
+            }
           }
         } else {
           this.results_hide();
