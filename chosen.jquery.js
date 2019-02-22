@@ -374,7 +374,6 @@
     };
 
     AbstractChosen.prototype.winnow_results = function (options) {
-      console.time('results');
       var escapedQuery, fix, i, len, option, prefix, query, ref, regex, results, results_group, search_match, startpos, suffix, text;
       this.no_results_clear();
       results = 0;
@@ -485,14 +484,10 @@
       this.result_clear_highlight();
       if (results < 1 && query.length) {
         this.update_results_content("");
-        console.timeEnd('results');
-        console.log('no_results');
         return this.no_results(query);
       } else {
         this.update_results_content(this.results_option_build());
         if (!(options != null ? options.skip_highlight : void 0)) {
-          console.timeEnd('results');
-          console.log('winnow_results_set_highlight');
           return this.winnow_results_set_highlight();
         }
       }
@@ -1066,7 +1061,6 @@
     };
 
     Chosen.prototype.result_do_highlight = function (el) {
-      console.time('doHighlight');
       var high_bottom, high_top, maxHeight, visible_bottom, visible_top;
       if (el.length) {
         this.result_clear_highlight();
@@ -1078,13 +1072,10 @@
         high_top = this.result_highlight.position().top + this.search_results.scrollTop();
         high_bottom = high_top + this.result_highlight.outerHeight();
         if (high_bottom >= visible_bottom) {
-          console.timeEnd('doHighlight');
           return this.search_results.scrollTop((high_bottom - maxHeight) > 0 ? high_bottom - maxHeight : 0);
         } else if (high_top < visible_top) {
-          console.timeEnd('doHighlight');
           return this.search_results.scrollTop(high_top);
         }
-        console.timeEnd('doHighlight');
       }
     };
 
@@ -1354,15 +1345,12 @@
     };
 
     Chosen.prototype.winnow_results_set_highlight = function () {
-      console.time('highlight');
       var do_high, selected_results;
       selected_results = !this.is_multiple ? this.search_results.find(".result-selected.active-result") : [];
       do_high = selected_results.length ? selected_results.first() : this.search_results.find(".active-result").first();
       if (do_high != null) {
-        console.timeEnd('highlight');
         return this.result_do_highlight(do_high);
       }
-      console.timeEnd('highlight');
     };
 
     Chosen.prototype.no_results = function (terms) {
